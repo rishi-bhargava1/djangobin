@@ -1,0 +1,12 @@
+{% extends 'basic.html' %}
+{%block title%}My Title--{{block.super}}{%endblock%}
+{%  block content %}
+    {% if now %}
+        <p>Current Time Is: {{now}}</p>
+    {% else %}
+        <p>The Is No Time</p>
+    {% endif %}
+    <p>The Request Scheme: {{request.scheme}}</p>
+    <p>The Request Path: {{request.path}}</p>
+    <p>Dirs : {{dir}}</p>
+{%  endblock %}
