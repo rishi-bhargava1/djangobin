@@ -1,26 +1,17 @@
-from django.utils.text import slugify
+# from pygments.formatters import ClassNotFound
+from pygments import lexers, highlight
+from pygments.formatters import html
 from django.db import models
 from . utils import Preference as Pref
-from pygments import lexers, highlight
-# from pygments.formatters import ClassNotFound
-from pygments.formatters import html
+from django.db.models.signals import post_save
 from django.shortcuts import reverse
+from django.dispatch import receiver
+from django.utils.text import slugify
 import time
+from django.contrib.auth.models import User
 
 
 # Create your models here.
-
-
-class Author(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    active = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)
-    last_logged_in = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        # return self.name + " : " + self.email
-        return f"{self.name} : {self.email}"
 
 
 class Language(models.Model):
@@ -38,6 +29,18 @@ class Language(models.Model):
     def get_lexer(self):
         return lexers.get_lexer_by_name(self.lang_code)
 
+    @staticmethod
+    def get_default_language():
+        lang = Language.objects.get_or_create(
+            name='Plain Text',
+            lang_code='text',
+            slug='text',
+            mime='text/plain',
+            file_extension='.txt'
+        )
+
+        return lang[0].id
+
     def __str__(self):
         return self.name
 
@@ -45,11 +48,38 @@ class Language(models.Model):
         return reverse('djangobin:trending_snippets', args=[self.slug])
 
 
+class Author(models.Model):
+    user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    default_language = models.ForeignKey(Language, on_delete=models.CASCADE,
+                                         default=Language.get_default_language)
+    default_exposure = models.CharField(max_length=10, choices=Pref.exposure_choices,
+                                        default=Pref.SNIPPET_EXPOSURE_PUBLIC)
+    default_expiration = models.CharField(max_length=10, choices=Pref.expiration_choices,
+                                          default=Pref.SNIPPET_EXPIRE_NEVER)
+    private = models.BooleanField(default=False)
+    views = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.user.username
+
+    def get_absolute_url(self):
+
+        return reverse('djangobin:profile', args=[self.user.username])
+
+    def get_snippet_count(self):
+        return self.user.snippet_set.count()
+
+    @receiver(post_save, sender=User)
+    def create_author(sender, **kwargs):
+        if kwargs.get('created', False):
+            Author.objects.get_or_create(user=kwargs.get('instance'))
+
+
 class Snippet(models.Model):
     title = models.CharField(max_length=200, blank=True)
     original_code = models.TextField()
     highlighted_code = models.TextField(blank=True, help_text="Read only field. Will contain the "
-                                                              "syntax-highlited version of the original code.")
+                                                              "syntax-highlighted version of the original code.")
     expiration = models.CharField(max_length=10, choices=Pref.expiration_choices)
     exposure = models.CharField(max_length=10, choices=Pref.exposure_choices)
     hits = models.IntegerField(default=0, help_text='Read only field. Will be updated after every visit to snippet.')
@@ -57,7 +87,7 @@ class Snippet(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.ManyToManyField('Tag', blank=True)
 
     class Meta:

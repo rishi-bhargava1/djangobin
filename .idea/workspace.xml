@@ -4,11 +4,8 @@
     <list default="true" id="a938ade4-b28e-46f3-8ab1-1571cdd87ff3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_project/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_project/django_project/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/django_project/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_project/djangobin/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/djangobin/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/django_project/djangobin/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/djangobin/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_project/djangobin/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/djangobin/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_project/my.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_project/my.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
