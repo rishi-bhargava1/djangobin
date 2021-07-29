@@ -11,4 +11,5 @@ urlpatterns = [
     url('^(?P<snippet_slug>[\d]+)/$', views.snippet_detail, name='snippet_detail'),
     url('^tag/(?P<tag>[\w-]+)/$', views.tag_list, name='tag_list'),
     url('^add-lang/$', views.add_lang, name='add_lang'),
+    url('^update-lang/(?P<lang_slug>[\w-]+)/$', views.update_lang, name='update_lang'),
 ]
