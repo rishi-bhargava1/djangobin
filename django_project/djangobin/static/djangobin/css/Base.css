@@ -1,0 +1,131 @@
+body{
+    margin:auto;
+}
+
+.recent-snippets{
+    display: inline-block;
+    float: right;
+    width: 200px;
+    height: 400px;
+    margin: 12px 30px;
+}
+
+.recent-snippets h5{
+    margin: auto;
+}
+
+.recent-snippets p{
+    margin: 11px 2px;
+}
+
+recent-snippets h5{
+    margin: 5px 2px;
+}
+
+.container-head{
+    background-color: rgb(241, 247, 246);
+    padding: 1px 14px;
+    overflow: auto;
+}
+
+.container-head-left{
+    float: right;
+}
+
+.default-logo{
+    float: left;
+    margin-top: 14px;
+    font-family: sans-serif;
+}
+
+#default-logo{
+    text-decoration: none;
+    color: rgb(86, 86, 104);
+    font-size: larger;
+    font-weight: bold;
+}
+
+.user-login-logo{
+    float: right;
+    display: inline-block;
+    color: #908f96;
+    position: relative;
+    right: 163px;
+    top: 15px;
+}
+
+.user-name{
+    display: inline-block;
+}
+
+#user-name{
+    margin: 1px 6px;
+    padding: 16px 1px;
+    color: #908f96;
+}
+
+.cls-login-signup{
+    display: inline-block;
+}
+
+.login-signup-btn{
+    border: 1px solid rgb(253, 63, 63);
+    padding: 3px 11px;
+    color: rgb(253, 63, 63);
+    font-weight: bold;
+}
+
+.login-signup-btn:hover{
+    border-color: rgb(253, 2, 2);
+    color: rgb(253, 2, 2);
+    background-color: #e4dcdc;
+    cursor: pointer;
+}
+
+.navbar-default{
+    overflow: auto;
+}
+
+.navbar-default ul{
+    overflow: auto;
+    margin: auto;
+    float: left;
+}
+
+.navbar-default ul li{
+    float: left;
+    list-style: none;
+    padding: 5px 10px;
+    border: 2px solid #889ea0;
+    margin: 4px 5px;
+    border-radius: 8px;
+    color:#6a8d90;
+}
+
+.navbar-default ul li a{
+    text-decoration: none;
+    color: #6a8d90;
+}
+
+.navbar-default ul li:hover{
+    background-color: rgb(222, 230, 228);
+}
+
+.navbar-default .nav-mesg-green{
+    float: left;
+    padding: 13px 125px;
+    color: #69a909;
+    font-weight: bold;
+}
+
+.navbar-default .nav-mesg-red{
+    float: left;
+    padding: 13px 125px;
+    color: #e26b6b;
+    font-weight: bold;
+}
+
+/*.navbar-default .nav-password-reset{
+    float: right;
+    margin: 9px 3px;
+}*/

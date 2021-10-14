@@ -1,0 +1,57 @@
+{% extends 'djangobin/Base.html' %}
+
+{% block title %}Contact Us-Page{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block main %}
+    <h4>Contact </h4>
+    <hr>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div>
+            <div>
+                {{ form.name.errors }}
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+        </div>
+
+        <div>
+            <div>
+                {{ form.email.errors }}
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+        </div>
+
+        <div>
+            <div>
+                {{ form.purpose.errors }}
+                {{ form.purpose.label_tag }}
+                {{ form.purpose }}
+            </div>
+        </div>
+
+        <div>
+            <div>
+                {{ form.message.errors }}
+                {{ form.message.label_tag }}
+                {{ form.message }}
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}

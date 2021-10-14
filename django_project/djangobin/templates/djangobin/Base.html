@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {% load static %}
+     {% load humanize %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'djangobin/css/Base.css' %}">
+<!--    <link rel="stylesheet" href="/css/Base.css">  -->
+    {% block css-static-files %}{% endblock %}
+
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+    <body>
+        <header>
+            <div id="id_container-head" class="container-head">
+                <div class="default-logo">
+                    <a id="default-logo" href="/">DjangoBin</a>
+                </div>
+
+                <div class="user-login-logo">
+                    <img src="{% static 'djangobin/images/user_login.jpg' %}" alt="user_login" width="15" height="15">
+                </div>
+
+                <div class="container-head-left">
+                    <div class="user-name">
+                        {% if request.user.is_authenticated == False %}
+                            <h6 id="user-name">Hello GUEST!</h6>
+                        {% else %}
+                            <h6 id="user-name">Hello {{request.user.username|title}}!</h6>
+                        {% endif %}
+                    </div>
+
+                    <div class="cls-login-signup">
+                        {% if request.user.is_authenticated %}
+                            <a class="login-signup-btn" href="{% url 'djangobin:logout' %}">Logout</a>
+                        {% elif not request.user.is_authenticated and request.path == '/logout/' or not request.user.is_authenticated and request.path == '/login/' %}
+                                <a class="login-signup-btn" href="{% url 'djangobin:login'%}">Login</a>
+                        {% else %}
+                                <a class="login-signup-btn" href="{% url 'djangobin:login'%}?next={{request.path}}">Login</a>
+                        {% endif %}
+                    </div>
+
+                     {% if not request.user.is_authenticated %}
+                        <div class="cls-login-signup">
+                            <a class="login-signup-btn" href="{% url 'djangobin:signup' %}">Sign Up</a>
+                        </div>
+                     {% endif %}
+                </div>
+            </div>
+
+            {% block nav %}
+                <nav class="navbar-default">
+                    <ul class="nav-list">
+                        <li class="nav-li-item"><a class="nav-item" href="#">Add</a></li>
+                        <li class="nav-li-item"><a class="nav-item" href="{% url 'djangobin:trending_snippets' %}">Trending</a></li>
+                        <li class="nav-li-item"><a class="nav-item" href="#">About</a></li>
+                        <li class="nav-li-item"><a class="nav-item" href="{% url 'djangobin:contact' %}">Contact</a></li>
+                    </ul>
+
+                    {% if not request.user.is_authenticated %}
+                        <span class="nav-mesg-red">WELCOME! Please Login To Access Cool Features Of This App.</span>
+
+                    {% else %}
+                        <span class="nav-mesg-green">You Are Welcome {{request.user.username|title}} In DjangoBin App.</span>
+                    {% endif %}
+                </nav>
+            {% endblock %}
+        </header>
+
+        <!-- recent-snippets is a QuerySet from djangobin.context_processors.py -->
+        <div class="recent-snippets">
+            {% if recent_snippets %}
+                <h4>Recent Snippets:</h4>
+                {% for recent_snippet in recent_snippets %}
+                    <a href="{{ recent_snippet.get_absolute_url }}" class="">
+                        <h5 class=""><span class=""></span> {{ recent_snippet.title }}</h5>
+                    </a>
+                        <p class="">{{ recent_snippet.created_on|naturaltime }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {% block main %} {% endblock %}
+        {% block js %} {% endblock %}
+    </body>
+</html>

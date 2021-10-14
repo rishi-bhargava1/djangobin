@@ -1,0 +1,31 @@
+.index-form{
+    display: inline-block;
+    width: 912px;
+}
+
+.form-field-cont{
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-fields{
+    margin:0px 5px;
+}
+
+.form-btn{
+    margin: 12px 7px;
+}
+
+.cls-form-btn{
+    border: 1px solid #33bbe4;
+    border-radius: 2px;
+    background: #33bbe4;
+    color: white;
+}
+
+.cls-form-btn:hover{
+    cursor:pointer;
+    border: 1px solid #2da7cc;
+    background:#2da7cc;
+}

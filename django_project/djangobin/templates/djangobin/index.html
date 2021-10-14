@@ -1,0 +1,71 @@
+{% extends 'djangobin/Base.html' %}
+
+{% block css-static-files %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'djangobin/css/index.css' %}">
+{% endblock %}
+
+{% block title %}Index-Page{% endblock %}
+
+{% block nav %} {{block.super}} {% endblock %}
+
+{% block main %}
+    <form class="index-form" action="" method="post">
+        {% csrf_token %}
+
+        {{ form.original_code.errors }}
+
+        {{ form.original_code }}
+
+        <hr>
+
+        <div class="form-field-cont">
+            <div class="form-fields">
+                <label for="{{ form.language.id_for_label }}" class="form-field-labels">Language</label>
+                <div class="form-field-inputs">
+                    {{ form.language }}
+                </div>
+            </div>
+
+            {{ form.expiration.errors }}
+
+            <div class="form-fields">
+                <label for="{{ form.expiration.id_for_label }}" class="form-field-labels">Expiration</label>
+                <div class="form-field-inputs">
+                    {{ form.expiration }}
+                </div>
+            </div>
+
+            {{ form.exposure.errors }}
+
+            <div class="form-fields">
+                <label for="{{ form.exposure.id_for_label }}" class="form-field-labels">Exposure</label>
+                <div class="form-field-inputs">
+                    {{ form.exposure }}
+                </div>
+            </div>
+
+            <div class="form-fields">
+                <label for="{{ form.title.id_for_label }}" class="form-field-labels">Title</label>
+                <div class="form-field-inputs">
+                    {{ form.title }}
+                </div>
+            </div>
+
+            {{form.snippet_tags.errors}}
+
+            <div class="form-fields">
+                <label for="{{ form.snippet_tags.id_for_label }}" class="form-field-labels">Tags</label>
+                <div class="form-field-inputs">
+                    {{ form.snippet_tags }}
+                    <div>{{form.snippet_tags.help_text}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-btn">
+            <input class="cls-form-btn" type="submit" value="Submit">
+        </div>
+    </form>
+{% endblock %}
+{% block js %} {% endblock %}

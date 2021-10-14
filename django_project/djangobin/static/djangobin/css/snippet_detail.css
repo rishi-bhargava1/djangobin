@@ -1,0 +1,70 @@
+.banner{
+    height: 25px;
+    background-color: #bee2ef;
+    color: #5857c3;
+}
+
+.banner-element{
+    width: 250px;
+    margin: auto;
+    padding-top: 5px;
+}
+
+.message{
+    height: 25px;
+    background-color: #49e291;
+    color: #323738;
+}
+
+.main-container{
+    display: inline-block;
+    height: 450px;
+    width: 780px;
+    border: 1px solid black;
+    margin: 20px 44px;
+}
+
+.main-container .toolbar{
+    width: 778px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+}
+
+.main-container .toolbar .toolbar-element{
+    margin: 0px 2px;
+    padding: 2px 10px;
+}
+
+.main-container .code-box{
+    width: 778px;
+    height: 385px;
+    border: 1px solid red;
+}
+
+.main-container .code-box .code-box-toolbar{
+    width: 778px;
+    height: 20px;
+    border: 1px solid green;
+    background-color: #afaeae;
+}
+
+.main-container .code-box-toolbar-right{
+    float: right;
+    padding: 0px 6px;
+}
+
+.main-container .code-box-toolbar-right a{
+    text-decoration: none;
+}
+
+.main-container .code-box-toolbar-left{
+    float: left;
+}
+
+.main-container .code-box .code-wrapper{
+    width: 778px;
+    height: 361px;
+    border: 1px solid blue;
+    background-color: #f9f9f9;
+}

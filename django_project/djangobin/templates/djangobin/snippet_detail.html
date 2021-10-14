@@ -1,0 +1,70 @@
+{% extends 'djangobin/Base.html' %}
+
+{% block title %}Snippet-Detail-Page{% endblock %}
+
+{% block css-static-files %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'djangobin/css/snippet_detail.css' %}">
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block main %}
+    <div class="banner">
+        {% if not request.user.is_authenticated %}
+            <h5 class="banner-element">Login to access cool features.</h5>
+        {% else %}
+            <h5 class="banner-element">Welcome in snippet detail.</h5>
+        {% endif %}
+
+    </div>
+
+    {% if messages %}
+        <ul class="message">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="main-container" >
+        <div class="toolbar">
+
+            <div class="toolbar-element">
+                image
+            </div>
+
+            <div class="toolbar-element">{{ snippet.title|default:"Untitled" }}</div>
+            <div class="toolbar-element">{{ snippet.user.username|capfirst }}</div>
+            <div class="toolbar-element">{{ snippet.created_on }}</div>
+            <div class="toolbar-element">{{ snippet.hits }}</div>
+            <div class="toolbar-element">{{ snippet.expiration }}</div>
+
+            <div class="toolbar-element">
+                {% if snippet.tags.all %}
+                    {% for tag in snippet.tags.all %}
+                        <a href="{{tag.get_absolute_url}}">{{tag}}</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="code-box">
+            <div class="code-box-toolbar">
+                <span class="code-box-toolbar-left">
+                    <a href="{% url 'djangobin:trending_snippets' snippet.language.slug %}">{{ snippet.language }}</a>
+                </span>
+
+                <span class="code-box-toolbar-right">
+                    <a href="#">delete</a>
+                    <a href="{% url 'djangobin:raw_snippet' snippet.slug %}">raw</a>
+                    <a href="{% url 'djangobin:download_snippet' snippet.slug %}">download</a>
+                </span>
+            </div>
+            <div class="code-wrapper">
+                {{snippet.highlighted_code|safe}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %} {% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'djangobin/Base.html' %}
+
+{% block title %}User Details{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block main %}
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Username</dt>
+        <dd>{{ request.user.username }}</dd>
+
+        <dt>Email</dt>
+        <dd>{{ request.user.email }}</dd>
+
+        <dt>Date Joined</dt>
+        <dd>{{ request.user.date_joined }}</dd>
+
+        <dt>Last Login</dt>
+        <dd>{{ request.user.last_login }}</dd>
+
+        <dt>Snippet created</dt>
+        <dd>{{ request.user.profile.get_snippet_count }}</dd>
+    </dl>
+</div>
+
+{% endblock %}

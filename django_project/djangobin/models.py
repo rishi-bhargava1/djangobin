@@ -1,14 +1,14 @@
 # from pygments.formatters import ClassNotFound
-from pygments import lexers, highlight
-from pygments.formatters import html
-from django.db import models
-from . utils import Preference as Pref
-from django.db.models.signals import post_save
-from django.shortcuts import reverse
-from django.dispatch import receiver
-from django.utils.text import slugify
 import time
+from . utils import Preference as Pref
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.shortcuts import reverse
+from django.utils.text import slugify
+from pygments.formatters import html
+from pygments import lexers, highlight
 
 
 # Create your models here.
@@ -94,7 +94,7 @@ class Snippet(models.Model):
         ordering = ['-created_on']
 
     def highlight(self):
-        formatter = html.HtmlFormatter(linenos=True)
+        formatter = html.HtmlFormatter(full=True, linenos=True)
         return highlight(self.original_code, self.language.get_lexer(), formatter)
 
     def __str__(self):

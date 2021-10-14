@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'djangobin'
 ]
 
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'djangobin.context_processors.recent_snippets',
             ],
         },
     },
@@ -120,3 +122,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SERVER_EMAIL = 'infooveriq@gmail.com'
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
+
+ADMINS = (
+    ('OverIQ', 'admin@overiq.com'),
+)
+
+MANAGERS = (
+    ('OverIQ', 'manager@overiq.com'),
+)
+
+# LOGIN_REDIRECT_URL = 'djangobin:index'
+
+LOGIN_URL = 'djangobin:login'
